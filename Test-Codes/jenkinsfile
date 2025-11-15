@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    stages {
+        // This is an outer stage that runs **before** the parallel stages.
+        // It executes sequentially at the very start of the pipeline.
+        stage("Before Parallel Stage") {
+            steps {
+                // Output message to indicate the start of this outer stage
+                echo "This stage is outer side of the parallel stages and runs before the parallel"
+
+                // Sleep for 10 seconds to simulate a short task
+                sh 'sleep 10'
+
+                // Output message after completion of the task
+                echo "Task completed after 10 seconds"
+            }
+        }
+
+        // This stage defines a parallel execution block.
+        stage("Parallel Stage") {
+            parallel {
+                // First parallel stage
+                stage("Stage 1") {
+                    steps {
+                        echo "Stage running under parallel stage 1"
+
+                        // Sleep for 45 seconds to simulate a long-running task
+                        sh 'sleep 45'
+
+                        echo "Task completed after 45 seconds"
+                    }
+                }
+
+                // Second parallel stage
+                stage("Stage 2") {
+                    steps {
+                        echo "Stage running under parallel stage 2"
+
+                        // Sleep for 45 seconds to simulate another long-running task
+                        sh 'sleep 45'
+
+                        echo "Task completed after 45 seconds"
+                    }
+                }
+            }
+        }
+          // This is an outer stage that runs after the parallel stages.
+        // It will execute sequentially after the parallel block has completed.
+        stage("After Parallel Stage") {
+            steps {
+                // Output message to indicate the start of this outer stage
+                echo "This stage is outer side of the parallel stages"
+                
+                // Sleep for 10 seconds (simulating some processing)
+                sh 'sleep 10'
+                
+                // Once the sleep is done, output this message to indicate task completion
+                echo "Task completed after 10 seconds"
+            }
+        }
+    }
+}
