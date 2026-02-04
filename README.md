@@ -7,7 +7,7 @@ It helps automate parts of the software development process like **building**, *
 
 With Jenkins, you can:
 
-* 🏗️ Automatically build and test your code whenever you push changes
+* 🏗️ Automatically build and test your code whenever you push changes 
 * 🔁 Integrate tools like Git, Docker, AWS, and Kubernetes
 * 🚀 Deploy applications to different environments with ease
 * 👷‍♂️ Create automated pipelines for end-to-end workflows
